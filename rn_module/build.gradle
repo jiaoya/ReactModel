@@ -1,0 +1,69 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+def useIntlJsc = false
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // 本地依赖包(查看根目录下react-native目录),运行react必须的核心包
+    api 'com.facebook.react:react-native:0.61.2'
+    // SoLoader是facebook出品的一款小巧的用于加载so库文件的开源项目，SoLoader就是一种兼容4.3以下版本的技术解决方案
+    api 'com.facebook.soloader:soloader:0.6.0'
+
+    // JSC build scripts for Android(适用于Android的JavaScriptCore构建脚本)
+    api 'org.webkit:android-jsc:+'
+    //  'org.webkit:android-jsc-intl:+'`
+    //   api 'org.webkit:android-jsc:r174650'
+
+    // react加载相关的图片依赖的库
+    api 'com.facebook.fresco:fresco:2.0.0'
+    // 支持 GIF 动图，需要添加
+    api 'com.facebook.fresco:animated-gif:2.0.0'
+
+    // 支持 WebP （静态图+动图），需要添加
+    api 'com.facebook.fresco:animated-webp:2.0.0'
+    api 'com.facebook.fresco:webpsupport:2.0.0'
+
+    // 仅支持 WebP 静态图，需要添加
+    api 'com.facebook.fresco:webpsupport:2.0.0'
+
+    // okhttp
+    api 'com.facebook.fresco:imagepipeline-okhttp3:2.0.0'
+    api 'com.squareup.okhttp3:okhttp:4.2.1'
+
+    // 文本处理库
+    api 'com.facebook.fbui.textlayoutbuilder:textlayoutbuilder:1.0.0'
+}
